@@ -1,6 +1,6 @@
 add_rules("mode.debug", "mode.release")
 
-local req_db = "sqlite"
+local req_db = "sqlite3"
 
 add_requires(req_db)
 
