@@ -1,12 +1,20 @@
 add_rules("mode.debug", "mode.release")
 
-target("sqlite_cpp")
-    set_kind("static")
-    add_files("src/interface.cpp")
+local req_db = "sqlite"
 
-target("sqlite_cpp_demo")
+add_requires(req_db)
+
+local static_name = "library"
+
+target(static_name)
+    set_kind("static")
+    add_packages(req_db, {links = req_db})
+    add_files("src/" .. static_name .. "/*.cpp")
+
+target("sqlite_cpp")
     set_kind("binary")
-    add_deps("sqlite_cpp")
+    add_packages(req_db, {links = req_db})
+    add_deps(static_name)
     add_files("src/main.cpp")
 
 --
